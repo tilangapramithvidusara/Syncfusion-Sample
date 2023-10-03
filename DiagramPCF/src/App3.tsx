@@ -1725,7 +1725,6 @@ function createPort(id: string, offset: { x: number; y: number; }) {
         </div>
         <div className="row property-panel-content" id="appearance">
           <div className="row row-header" style={{ paddingTop: "10px" }}>
-            Shapes Filling
           </div>
           <div className="row" style={{ paddingTop: "8px" }}>
               <div title="Image" className="image-pattern-style" id="image" style={{
