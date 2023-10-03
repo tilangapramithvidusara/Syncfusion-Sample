@@ -1338,7 +1338,7 @@ function createPort(id: string, offset: { x: number; y: number; }) {
   }
   return (
     <div className="control-pane diagram-control-pane">
-      <button onClick={handleCaptureScreenshot}>Capture Screenshot</button>
+     <div className="text-right mb-10"><button className="btn btn-primary" onClick={handleCaptureScreenshot}>Capture Screenshot</button></div>
         {/* <style>{sample_css}</style> */}
       <div className="col-lg-8 control-section">
         <div style={{ width: "100%" }}>
@@ -1461,8 +1461,9 @@ function createPort(id: string, offset: { x: number; y: number; }) {
           <div className="sb-mobile-palette-bar">
             <div id="palette-icon" style={{ float: "right" }} className="e-ddb-icons1 e-toggle-palette"></div>
           </div>
+          <div className="flex">
           <div
-            id="palette-space" className="sb-mobile-palette"
+            id="palette-space" className="w-20 sb-mobile-palette"
           >
             <SymbolPaletteComponent
               id="symbolpalette"
@@ -1521,8 +1522,7 @@ function createPort(id: string, offset: { x: number; y: number; }) {
             />
           </div>
           <div
-            id="diagram-space" className="sb-mobile-diagram content-wrapper"
-            style={{ width: "100%", background: 'white' }}
+            id="diagram-space" className="sb-mobile-diagram content-wrapper w-80"
             ref={divRef}
           >
             <DiagramComponent
@@ -1687,6 +1687,7 @@ function createPort(id: string, offset: { x: number; y: number; }) {
               <Inject services={[PrintAndExport,UndoRedo]} />
             </DiagramComponent>
           </div>
+          </div>
         </div>
       </div>
       <div className="col-lg-4 property-section">
@@ -1694,9 +1695,9 @@ function createPort(id: string, offset: { x: number; y: number; }) {
         <div id="propertypanel" className="e-remove-selection">
           <div className="property-section-content">
             <div className="row property-panel-content" id="appearance">
-              <div className="row row-header">Alignment</div>
-              <div className="row">
-                <div className="row" style={{ paddingTop: "8px" }}>
+              <div className="row-header">Alignment</div>
+              <div className="flex">
+                <div className="item-wrap">
                   <div className="image-pattern-style" id="left" style={{
                       backgroundImage: "url('https://ej2.syncfusion.com/react/demos/src/diagram/Images/annotation/Annotation_1.png')",
                       marginRight: "4px"
@@ -1709,7 +1710,7 @@ function createPort(id: string, offset: { x: number; y: number; }) {
                       backgroundImage: "url('https://ej2.syncfusion.com/react/demos/src/diagram/Images/annotation/Annotation_3.png')"
                   }}/>
                 </div>
-                <div className="row" style={{ paddingTop: "8px" }}>
+                <div className="item-wrap">
                   <div className="image-pattern-style" id="bottomr" style={{
                       backgroundImage: "url('https://ej2.syncfusion.com/react/demos/src/diagram/Images/annotation/Annotation_4.png')",
                       margin: "0px 4px"
@@ -1724,10 +1725,10 @@ function createPort(id: string, offset: { x: number; y: number; }) {
           </div>
         </div>
         <div className="row property-panel-content" id="appearance">
-          <div className="row row-header" style={{ paddingTop: "10px" }}>
+          <div className="row-header">
             Shapes Filling
           </div>
-          <div className="row" style={{ paddingTop: "8px" }}>
+          <div className="flex">
               <div title="Image" className="image-pattern-style" id="image" style={{
               backgroundImage: "url('https://ej2.syncfusion.com/react/demos/src/diagram/Images/drawingTool/DrawingTool_7.png')",
               marginRight: "3px"
@@ -1742,106 +1743,107 @@ function createPort(id: string, offset: { x: number; y: number; }) {
           }}/>
           </div>
         </div>
-        <div>
+        <div className="row property-panel-content">
+          <div className="row-header">
             Node Fill
+          </div>
+          <div className="flex">
+              <ColorPickerComponent id="nodecolor" value="#000" change={(arg) => {
+                  for (let i = 0; i < diagramInstance.selectedItems.nodes.length; i++) {
+                      debugger
+                      node = diagramInstance.selectedItems.nodes[i];
+                          node.style.fill = arg.currentValue.rgba;
+                  }
+                }} ref={nodeColor => (nodeColor = nodeColor)}/>
+          </div>
+       </div>
+       <div className="row property-panel-content">
+          <div className="row-header">Appearance</div>
+          <div className="flex">
+            <div className="column-style">
+              <ButtonComponent style={{ width: "100%" }} id="bold" iconCss={"e-diagram-icons e-diagram-bold"} ref={boldref => (bold = boldref)}>
+                {" "}
+              </ButtonComponent>
             </div>
-              <div>
-                <ColorPickerComponent id="nodecolor" value="#000" change={(arg) => {
-                    for (let i = 0; i < diagramInstance.selectedItems.nodes.length; i++) {
-                        debugger
-                        node = diagramInstance.selectedItems.nodes[i];
-                            node.style.fill = arg.currentValue.rgba;
-                    }
-                  }} ref={nodeColor => (nodeColor = nodeColor)}/>
-              </div>
-              <div className="row property-panel-content" style={{ paddingTop: "10px", overflow: "hidden" }}>
-                <div className="row row-header">Appearance</div>
-                <div className="row" style={{ paddingTop: "8px" }}>
-                  <div className="col-xs-4 column-style">
-                    <ButtonComponent style={{ width: "100%" }} id="bold" iconCss={"e-diagram-icons e-diagram-bold"} ref={boldref => (bold = boldref)}>
-                      {" "}
-                    </ButtonComponent>
-                  </div>
-                  <div className="col-xs-4 column-style">
-                    <ButtonComponent style={{ width: "100%" }} id="italic" iconCss={"e-diagram-icons e-diagram-italic"} ref={italicref => (italic = italicref)}>
-                      {" "}
-                    </ButtonComponent>
-                  </div>
-                  <div className="col-xs-4 column-style">
-                    <ButtonComponent style={{ width: "100%" }} id="underline" iconCss={"e-diagram-icons e-diagram-underline"} ref={underLineref => (underLine = underLineref)}>
-                      {" "}
-                    </ButtonComponent>
-                  </div>
-                </div>
-                <div className="row" style={{ paddingTop: "8px" }}>
-                  <div className="col-xs-4 column-style">
-                    <ColorPickerComponent 
-                      id="fontcolor" 
-                      value="#000" 
-                      change={(arg) => {
-                        for (let i = 0; i < diagramInstance.selectedItems.nodes.length; i++) {
-                            node = diagramInstance.selectedItems.nodes[i];
-                            for (let j = 0; j < node.annotations.length; j++) {
-                                node.annotations[j]
-                                    .style.color =
-                                    arg.currentValue.rgba;
-                            }
-                        }
-                      }} ref={fontcolor => (fontColor = fontcolor)}/>
-                  </div>
-                  <div className="col-xs-4 column-style">
-                    <NumericTextBoxComponent 
-                      id="fontSize" 
-                      value={12} 
-                      min={0} 
-                      max={50} 
-                      step={1} 
-                      format="##.##" 
-                      change={() => {
-                        changed("fontsize");
-                      }} ref={fontsize => (fontSize = fontsize)}/>
-                  </div>
-                  <div className="col-xs-4 column-style">
-                    <DropDownListComponent 
-                      id="fontfamily" 
-                      popupWidth={150} 
-                      width={"100%"} 
-                      placeholder={"select a font type"} 
-                      index={0} 
-                      dataSource={fontType} 
-                      change={() => {
-                          changed("fontfamily");
-                      }} ref={(fontfamily) => (fontFamily = fontfamily)}/>
-                  </div>
-                </div>
-                <div className="row" style={{ paddingTop: "10px" }}>
-                  <div className="row row-header">
-                    Templates
-                  </div>
-                  <div className="row col-xs-8" style={{ paddingLeft: "0px", paddingTop: "8px" }}>
-                    <DropDownListComponent 
-                      id="template" 
-                      fields={fields} 
-                      popupWidth={200} 
-                      width={"100%"} 
-                      placeholder={"select a template"} 
-                      dataSource={templateList} 
-                      change={() => {
-                          changed("template");
-                      }} ref={template => (templateData = template)}/>
-                  </div>
-                </div>
-                <div className="row" style={{ paddingTop: "10px" }}>
-                  <div className="row row-header">
+            <div className="column-style">
+              <ButtonComponent style={{ width: "100%" }} id="italic" iconCss={"e-diagram-icons e-diagram-italic"} ref={italicref => (italic = italicref)}>
+                {" "}
+              </ButtonComponent>
+            </div>
+            <div className="column-style">
+              <ButtonComponent style={{ width: "100%" }} id="underline" iconCss={"e-diagram-icons e-diagram-underline"} ref={underLineref => (underLine = underLineref)}>
+                {" "}
+              </ButtonComponent>
+            </div>
+          
+            <div className="column-style">
+              <ColorPickerComponent 
+                id="fontcolor" 
+                value="#000" 
+                change={(arg) => {
+                  for (let i = 0; i < diagramInstance.selectedItems.nodes.length; i++) {
+                      node = diagramInstance.selectedItems.nodes[i];
+                      for (let j = 0; j < node.annotations.length; j++) {
+                          node.annotations[j]
+                              .style.color =
+                              arg.currentValue.rgba;
+                      }
+                  }
+                }} ref={fontcolor => (fontColor = fontcolor)}/>
+            </div>
+            <div className="column-style">
+              <NumericTextBoxComponent 
+                id="fontSize" 
+                value={12} 
+                min={0} 
+                max={50} 
+                step={1} 
+                format="##.##" 
+                change={() => {
+                  changed("fontsize");
+                }} ref={fontsize => (fontSize = fontsize)}/>
+            </div>
+            <div className="column-style">
+              <DropDownListComponent 
+                id="fontfamily" 
+                popupWidth={150} 
+                width={"100%"} 
+                placeholder={"select a font type"} 
+                index={0} 
+                dataSource={fontType} 
+                change={() => {
+                    changed("fontfamily");
+                }} ref={(fontfamily) => (fontFamily = fontfamily)}/>
+            </div>
+          </div>
+      </div>
+        <div className="row property-panel-content">
+          <div className="row-header">
+            Templates
+          </div>
+          <div className="flex">
+            <DropDownListComponent 
+              id="template" 
+              fields={fields} 
+              popupWidth={200} 
+              width={"100%"} 
+              placeholder={"select a template"} 
+              dataSource={templateList} 
+              change={() => {
+                  changed("template");
+              }} ref={template => (templateData = template)}/>
+          </div>
+        </div>
+        <div className="row property-panel-content">
+            <div className="row-header">
                     Behaviour
                   </div>
-                  <div className="row" style={{ paddingTop: "8px" }}>
-                    <CheckBoxComponent id="labelConstraints" label={"labelConstraints"} checked={false} change={() => {
+            <div className="row">
+                <CheckBoxComponent id="labelConstraints" label={"labelConstraints"} checked={false} change={() => {
                       changed("interaction");
                     }}/>
-                  </div>
                 </div>
-              </div>
+            </div>
             </div>
           </div>
         </div>
