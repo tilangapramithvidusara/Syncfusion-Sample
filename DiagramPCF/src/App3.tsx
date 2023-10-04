@@ -3,6 +3,7 @@
 import * as ReactDOM from "react-dom";
 import * as React from "react";
 import { useRef } from 'react';
+import { useState } from "react";
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import {
@@ -724,7 +725,11 @@ function Default() {
   const [hiddenColorFont, setHiddenColorFont] = React.useState(false);
   const [fontFamilys, setFontFamily] = React.useState('Segoe UI')
   console.log('setSelectedNode ==> ', selectedNode, colorShape);
-
+  const initialColor = "#FF0000";
+  const [color, setColor] = useState(initialColor);
+  const [hidden, setHidden] = useState(true);
+  const hiddenTitle = "Show Color Picker";
+  const openTitle = "Hide Color Picker";
   const divRef = useRef(null);
 
   const handleCaptureScreenshot = () => {
@@ -1748,13 +1753,19 @@ function createPort(id: string, offset: { x: number; y: number; }) {
             Node Fill
           </div>
           <div className="flex">
-              <ColorPickerComponent id="nodecolor" value="#000" change={(arg) => {
+              {/* <ColorPickerComponent id="nodecolor" value="#000" change={(arg) => {
                   for (let i = 0; i < diagramInstance.selectedItems.nodes.length; i++) {
                       debugger
                       node = diagramInstance.selectedItems.nodes[i];
                           node.style.fill = arg.currentValue.rgba;
                   }
-                }} ref={nodeColor => (nodeColor = nodeColor)}/>
+                }} ref={nodeColor => (nodeColor = nodeColor)}/> */}
+                <ColorPicker  color={color}
+        hidden={hidden}
+        setColor={setColor}
+        setHidden={setHidden}
+        hiddenTitle={hiddenTitle}
+        openTitle={openTitle}  />
           </div>
        </div>
        <div className="row property-panel-content">
@@ -1777,7 +1788,7 @@ function createPort(id: string, offset: { x: number; y: number; }) {
             </div>
           
             <div className="column-style">
-              <ColorPickerComponent 
+              {/* <ColorPickerComponent 
                 id="fontcolor" 
                 value="#000" 
                 change={(arg) => {
@@ -1789,7 +1800,8 @@ function createPort(id: string, offset: { x: number; y: number; }) {
                               arg.currentValue.rgba;
                       }
                   }
-                }} ref={fontcolor => (fontColor = fontcolor)}/>
+                }} ref={fontcolor => (fontColor = fontcolor)}/> */}
+                   <ColorPicker  color={color}/>
             </div>
             <div className="column-style">
               <NumericTextBoxComponent 

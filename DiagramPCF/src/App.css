@@ -828,6 +828,8 @@
   color: #fff;
   font-size: 14px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
 }
 
 .diagram-control-pane .mb-10 {
