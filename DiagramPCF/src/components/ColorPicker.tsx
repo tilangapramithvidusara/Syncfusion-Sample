@@ -25,7 +25,7 @@ export default function App(
           />
         )}
 
-        <button className="color-picker-button btn btn-primary" onClick={() => setHidden(!hidden)}>
+        <button className="color-picker-button" onClick={() => setHidden(!hidden)}>
           {hidden ? openTitle : hiddenTitle}
         </button>
       </div>

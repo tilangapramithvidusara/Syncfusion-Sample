@@ -32,14 +32,15 @@
   height: 50px;
   width: 130px;
   cursor: pointer;
-  border: 1px solid #d5d5d5;
+  border: 2px solid #d5d5d5;
   background-position: center;
   float: left;
+  margin-right: 10px !important;
 }
 
 .image-pattern-style:hover {
   border-color: gray;
-  border-width: 1px;
+  border-width: 2px;
 }
 
 .e-remove-selection {
@@ -49,9 +50,8 @@
 .column-style {
   display: table;
   height: 35px;
-  padding-right: 4px;
+  padding-right: 10px;
   padding-left: 0px;
-  width: calc((100% - 12px) / 3);
 }
 
 .row {
@@ -749,33 +749,9 @@
   background-color: transparent;
   border-color: transparent;
 }
-.image-pattern-style {
-  background-color: white;
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 50px;
-  width: 130px;
-  cursor: pointer;
-  border: 1px solid #D5D5D5;
-  background-position: center;
-  float: left;
-}
-
-.image-pattern-style:hover {
-  border-color: gray;
-  border-width: 1px;
-}
 
 .e-remove-selection .property-section-content {
   pointer-events: none;
-}
-
-.column-style {
-  display: table;
-  height: 35px;
-  padding-right: 4px;
-  padding-left: 0px;
-  width: 30px;
 }
 
 .row {
@@ -830,6 +806,7 @@
   font-weight: 500;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .diagram-control-pane .mb-10 {
@@ -873,6 +850,7 @@
 .diagram-control-pane .e-checkbox-wrapper .e-control {
   width: 30px;
   vertical-align: middle;
+  height: 24px;
 }
 
 .diagram-control-pane .e-wrapper, .diagram-control-pane .e-control-wrapper {
@@ -904,4 +882,32 @@
 
 .diagram-control-pane .e-split-btn-wrapper .e-dropdown-btn {
   border-width: 1px;
+}
+
+ .diagram-control-pane .color-picker-button {
+  min-width: 150px;
+  height: 35px;
+  font-size: 13px;
+}
+
+.diagram-control-pane .column-style .e-dropdown-btn, .diagram-control-pane .row.property-panel-content .e-dropdown-btn, .diagram-control-pane .e-numeric {
+  min-width: 150px;
+  height: 35px;
+  font-size: 13px;
+} 
+
+.diagram-control-pane .column-style .e-lib {
+  width: 35px !important;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagram-control-pane .e-numeric-hidden {
+  display: none;
+}
+
+.diagram-control-pane #diagram_editTextBoxDiv {
+  height: 200px !important;
 }
