@@ -463,3 +463,9 @@ function DrawingTools() {
     </div>);
 }
 export default DrawingTools;
+
+
+{/* <div title="Image" className="image-pattern-style" id="image" style={{
+                backgroundImage: "url('https://venngage-wordpress.s3.amazonaws.com/uploads/2021/10/How-to-Diagram-a-Business-Process-Process-Diagramming-Templates-Blog-Header.png')",
+                marginRight: "3px"
+              }}/> */}

@@ -47,201 +47,219 @@ import ColorPicker from './components/ColorPicker';
 import FontPicker from "./components/FontPicker";
 import DropDownPicker from "./components/DropDownPicker";
 
+// FROM CONSTANTS
+//Initializes the nodes for the diagram
+import {nodes} from './constants/Nodes';
+
+//Initializes the connector for the diagram
+import {connectors} from "./constants/Connectors";
+
+//Initialize the flowshapes for the symbol palatte
+import {flowshapes} from './constants/FlowShapes';
+
+//Initializes connector symbols for the symbol palette
+import {connectorSymbols} from './constants/ConnectorSymbols';
+
+import {toolbarItems} from './constants/ToolbarItems';
+import {fontType, templateList} from './constants/KeyValues';
+
+//set the Annotation Position
+// import {setAnnotationPosition} from "./utils/operations";
 
 /**
  * Diagram Default sample
  */
 
 //Initializes the nodes for the diagram
-let nodes: NodeModel[] = [
-  {
-    id: "NewIdea",
-    height: 60,
-    offsetX: 300,
-    offsetY: 80,
-    shape: { type: "Flow", shape: "Terminator" },
-    annotations: [
-      {
-        content: "Place Order"
-      }
-    ]
-  },
-  {
-    id: "Meeting",
-    height: 60,
-    offsetX: 300,
-    offsetY: 160,
-    shape: { type: "Flow", shape: "Process" },
-    annotations: [
-      {
-        content: "Start Transaction"
-      }
-    ]
-  },
-  {
-    id: "BoardDecision",
-    height: 60,
-    offsetX: 300,
-    offsetY: 240,
-    shape: { type: "Flow", shape: "Process" },
-    annotations: [
-      {
-        content: "Verification"
-      }
-    ]
-  },
-  {
-    id: "Project",
-    height: 60,
-    offsetX: 300,
-    offsetY: 330,
-    shape: { type: "Flow", shape: "Decision" },
-    annotations: [
-      {
-        content: "Credit card valid?"
-      }
-    ]
-  },
-  {
-    id: "End",
-    height: 60,
-    offsetX: 300,
-    offsetY: 430,
-    shape: { type: "Flow", shape: "Decision" },
-    annotations: [
-      {
-        content: "Funds available?"
-      }
-    ]
-  },
-  {
-    id: "node11",
-    height: 60,
-    offsetX: 545,
-    offsetY: 330,
-    shape: { type: "Flow", shape: "Process" },
-    annotations: [
-      {
-        content: "Enter payment method"
-      }
-    ]
-  },
-  {
-    id: "transaction_entered",
-    height: 60,
-    offsetX: 300,
-    offsetY: 630,
-    shape: { type: "Flow", shape: "Terminator" },
-    annotations: [
-      {
-        content: "Log transaction"
-      }
-    ]
-  },
-  {
-    id: "node12",
-    height: 60,
-    offsetX: 480,
-    offsetY: 630,
-    shape: { type: "Flow", shape: "Process" },
-    annotations: [
-      {
-        content: "Reconcile the entries"
-      }
-    ]
-  },
-  {
-    id: "transaction_completed",
-    height: 60,
-    offsetX: 300,
-    offsetY: 530,
-    shape: { type: "Flow", shape: "Process" },
-    annotations: [
-      {
-        content: "Complete Transaction"
-      }
-    ]
-  },
-  {
-    id: "Data",
-    height: 45,
-    offsetX: 110,
-    offsetY: 530,
-    shape: { type: "Flow", shape: "Data" },
-    annotations: [
-      {
-        content: "Send e-mail",
-        margin: { left: 25, right: 25 }
-      }
-    ]
-  },
-  {
-    id: "node10",
-    height: 70,
-    offsetX: 475,
-    offsetY: 530,
-    shape: { type: "Flow", shape: "DirectData" },
-    annotations: [
-      { content: "Customer Database", margin: { left: 25, right: 25 } }
-    ]
-  }
-];
+// let nodes: NodeModel[] = [
+//   {
+//     id: "NewIdea",
+//     height: 60,
+//     offsetX: 300,
+//     offsetY: 80,
+//     shape: { type: "Flow", shape: "Terminator" },
+//     annotations: [
+//       {
+//         content: "Place Order"
+//       }
+//     ]
+//   },
+//   {
+//     id: "Meeting",
+//     height: 60,
+//     offsetX: 300,
+//     offsetY: 160,
+//     shape: { type: "Flow", shape: "Process" },
+//     annotations: [
+//       {
+//         content: "Start Transaction"
+//       }
+//     ]
+//   },
+//   {
+//     id: "BoardDecision",
+//     height: 60,
+//     offsetX: 300,
+//     offsetY: 240,
+//     shape: { type: "Flow", shape: "Process" },
+//     annotations: [
+//       {
+//         content: "Verification"
+//       }
+//     ]
+//   },
+//   {
+//     id: "Project",
+//     height: 60,
+//     offsetX: 300,
+//     offsetY: 330,
+//     shape: { type: "Flow", shape: "Decision" },
+//     annotations: [
+//       {
+//         content: "Credit card valid?"
+//       }
+//     ]
+//   },
+//   {
+//     id: "End",
+//     height: 60,
+//     offsetX: 300,
+//     offsetY: 430,
+//     shape: { type: "Flow", shape: "Decision" },
+//     annotations: [
+//       {
+//         content: "Funds available?"
+//       }
+//     ]
+//   },
+//   {
+//     id: "node11",
+//     height: 60,
+//     offsetX: 545,
+//     offsetY: 330,
+//     shape: { type: "Flow", shape: "Process" },
+//     annotations: [
+//       {
+//         content: "Enter payment method"
+//       }
+//     ]
+//   },
+//   {
+//     id: "transaction_entered",
+//     height: 60,
+//     offsetX: 300,
+//     offsetY: 630,
+//     shape: { type: "Flow", shape: "Terminator" },
+//     annotations: [
+//       {
+//         content: "Log transaction"
+//       }
+//     ]
+//   },
+//   {
+//     id: "node12",
+//     height: 60,
+//     offsetX: 480,
+//     offsetY: 630,
+//     shape: { type: "Flow", shape: "Process" },
+//     annotations: [
+//       {
+//         content: "Reconcile the entries"
+//       }
+//     ]
+//   },
+//   {
+//     id: "transaction_completed",
+//     height: 60,
+//     offsetX: 300,
+//     offsetY: 530,
+//     shape: { type: "Flow", shape: "Process" },
+//     annotations: [
+//       {
+//         content: "Complete Transaction"
+//       }
+//     ]
+//   },
+//   {
+//     id: "Data",
+//     height: 45,
+//     offsetX: 110,
+//     offsetY: 530,
+//     shape: { type: "Flow", shape: "Data" },
+//     annotations: [
+//       {
+//         content: "Send e-mail",
+//         margin: { left: 25, right: 25 }
+//       }
+//     ]
+//   },
+//   {
+//     id: "node10",
+//     height: 70,
+//     offsetX: 475,
+//     offsetY: 530,
+//     shape: { type: "Flow", shape: "DirectData" },
+//     annotations: [
+//       { content: "Customer Database", margin: { left: 25, right: 25 } }
+//     ]
+//   }
+// ];
 //Initializes the connector for the diagram
-let connectors: ConnectorModel[] = [
-  {
-    id: "connector1",
-    sourceID: "NewIdea",
-    targetID: "Meeting"
-  },
-  { id: "connector2", sourceID: "Meeting", targetID: "BoardDecision" },
-  { id: "connector3", sourceID: "BoardDecision", targetID: "Project" },
-  {
-    id: "connector4",
-    sourceID: "Project",
-    annotations: [{ content: "Yes", style: { fill: "white" } }],
-    targetID: "End"
-  },
-  {
-    id: "connector5",
-    sourceID: "End",
-    annotations: [{ content: "Yes", style: { fill: "white" } }],
-    targetID: "transaction_completed"
-  },
-  {
-    id: "connector6",
-    sourceID: "transaction_completed",
-    targetID: "transaction_entered"
-  },
-  { id: "connector7", sourceID: "transaction_completed", targetID: "Data" },
-  { id: "connector8", sourceID: "transaction_completed", targetID: "node10" },
-  {
-    id: "connector9",
-    sourceID: "node11",
-    targetID: "Meeting",
-    type: 'Orthogonal',
-    segments: [{ direction: "Top", type: 'Orthogonal', length: 120 }]
-  },
-  {
-    id: "connector10",
-    sourceID: "End",
-    annotations: [{ content: "No", style: { fill: "white" } }],
-    targetID: "node11",
-    type: 'Orthogonal',
-    segments: [{ direction: "Right", type: 'Orthogonal', length: 100 }]
-  },
-  {
-    id: "connector11",
-    sourceID: "Project",
-    annotations: [{ content: "No", style: { fill: "white" } }],
-    targetID: "node11"
-  },
-  {
-    id: "connector12",
-    style: { strokeDashArray: "2,2" },
-    sourceID: "transaction_entered",
-    targetID: "node12"
-  }
-];
+// let connectors: ConnectorModel[] = [
+//   {
+//     id: "connector1",
+//     sourceID: "NewIdea",
+//     targetID: "Meeting"
+//   },
+//   { id: "connector2", sourceID: "Meeting", targetID: "BoardDecision" },
+//   { id: "connector3", sourceID: "BoardDecision", targetID: "Project" },
+//   {
+//     id: "connector4",
+//     sourceID: "Project",
+//     annotations: [{ content: "Yes", style: { fill: "white" } }],
+//     targetID: "End"
+//   },
+//   {
+//     id: "connector5",
+//     sourceID: "End",
+//     annotations: [{ content: "Yes", style: { fill: "white" } }],
+//     targetID: "transaction_completed"
+//   },
+//   {
+//     id: "connector6",
+//     sourceID: "transaction_completed",
+//     targetID: "transaction_entered"
+//   },
+//   { id: "connector7", sourceID: "transaction_completed", targetID: "Data" },
+//   { id: "connector8", sourceID: "transaction_completed", targetID: "node10" },
+//   {
+//     id: "connector9",
+//     sourceID: "node11",
+//     targetID: "Meeting",
+//     type: 'Orthogonal',
+//     segments: [{ direction: "Top", type: 'Orthogonal', length: 120 }]
+//   },
+//   {
+//     id: "connector10",
+//     sourceID: "End",
+//     annotations: [{ content: "No", style: { fill: "white" } }],
+//     targetID: "node11",
+//     type: 'Orthogonal',
+//     segments: [{ direction: "Right", type: 'Orthogonal', length: 100 }]
+//   },
+//   {
+//     id: "connector11",
+//     sourceID: "Project",
+//     annotations: [{ content: "No", style: { fill: "white" } }],
+//     targetID: "node11"
+//   },
+//   {
+//     id: "connector12",
+//     style: { strokeDashArray: "2,2" },
+//     sourceID: "transaction_entered",
+//     targetID: "node12"
+//   }
+// ];
 const sample_css = `
 #conTypeBtn{
   background-color: transparent;
@@ -352,41 +370,41 @@ const sample_css = `
 }
 `;
 //Initialize the flowshapes for the symbol palatte
-let flowshapes: NodeModel[] = [
-  { id: "Terminator", shape: { type: "Flow", shape: "Terminator" } },
-  { id: "Process", shape: { type: "Flow", shape: "Process" } },
-  { id: "Decision", shape: { type: "Flow", shape: "Decision" } },
-  { id: "Document", shape: { type: "Flow", shape: "Document" } },
-  {
-    id: "PreDefinedProcess",
-    shape: { type: "Flow", shape: "PreDefinedProcess" }
-  },
-  { id: "PaperTap", shape: { type: "Flow", shape: "PaperTap" } },
-  { id: "DirectData", shape: { type: "Flow", shape: "DirectData" } },
-  { id: "SequentialData", shape: { type: "Flow", shape: "SequentialData" } },
-  { id: "Sort", shape: { type: "Flow", shape: "Sort" } },
-  { id: "MultiDocument", shape: { type: "Flow", shape: "MultiDocument" } },
-  { id: "Collate", shape: { type: "Flow", shape: "Collate" } },
-  { id: "SummingJunction", shape: { type: "Flow", shape: "SummingJunction" } },
-  { id: "Or", shape: { type: "Flow", shape: "Or" } },
-  { id: "InternalStorage", shape: { type: "Flow", shape: "InternalStorage" } },
-  { id: "Extract", shape: { type: "Flow", shape: "Extract" } },
-  { id: "ManualOperation", shape: { type: "Flow", shape: "ManualOperation" } },
-  { id: "Merge", shape: { type: "Flow", shape: "Merge" } },
-  {
-    id: "OffPageReference",
-    shape: { type: "Flow", shape: "OffPageReference" }
-  },
-  {
-    id: "SequentialAccessStorage",
-    shape: { type: "Flow", shape: "SequentialAccessStorage" }
-  },
-  { id: "Annotation", shape: { type: "Flow", shape: "Annotation" } },
-  { id: "Annotation2", shape: { type: "Flow", shape: "Annotation2" } },
-  { id: "Data", shape: { type: "Flow", shape: "Data" } },
-  { id: "Card", shape: { type: "Flow", shape: "Card" } },
-  { id: "Delay", shape: { type: "Flow", shape: "Delay" } }
-];
+// let flowshapes: NodeModel[] = [
+//   { id: "Terminator", shape: { type: "Flow", shape: "Terminator" } },
+//   { id: "Process", shape: { type: "Flow", shape: "Process" } },
+//   { id: "Decision", shape: { type: "Flow", shape: "Decision" } },
+//   { id: "Document", shape: { type: "Flow", shape: "Document" } },
+//   {
+//     id: "PreDefinedProcess",
+//     shape: { type: "Flow", shape: "PreDefinedProcess" }
+//   },
+//   { id: "PaperTap", shape: { type: "Flow", shape: "PaperTap" } },
+//   { id: "DirectData", shape: { type: "Flow", shape: "DirectData" } },
+//   { id: "SequentialData", shape: { type: "Flow", shape: "SequentialData" } },
+//   { id: "Sort", shape: { type: "Flow", shape: "Sort" } },
+//   { id: "MultiDocument", shape: { type: "Flow", shape: "MultiDocument" } },
+//   { id: "Collate", shape: { type: "Flow", shape: "Collate" } },
+//   { id: "SummingJunction", shape: { type: "Flow", shape: "SummingJunction" } },
+//   { id: "Or", shape: { type: "Flow", shape: "Or" } },
+//   { id: "InternalStorage", shape: { type: "Flow", shape: "InternalStorage" } },
+//   { id: "Extract", shape: { type: "Flow", shape: "Extract" } },
+//   { id: "ManualOperation", shape: { type: "Flow", shape: "ManualOperation" } },
+//   { id: "Merge", shape: { type: "Flow", shape: "Merge" } },
+//   {
+//     id: "OffPageReference",
+//     shape: { type: "Flow", shape: "OffPageReference" }
+//   },
+//   {
+//     id: "SequentialAccessStorage",
+//     shape: { type: "Flow", shape: "SequentialAccessStorage" }
+//   },
+//   { id: "Annotation", shape: { type: "Flow", shape: "Annotation" } },
+//   { id: "Annotation2", shape: { type: "Flow", shape: "Annotation2" } },
+//   { id: "Data", shape: { type: "Flow", shape: "Data" } },
+//   { id: "Card", shape: { type: "Flow", shape: "Card" } },
+//   { id: "Delay", shape: { type: "Flow", shape: "Delay" } }
+// ];
 
 const customConnectorTemplate = () => {
   return (
@@ -400,123 +418,123 @@ const customConnectorTemplate = () => {
   );
 }
 
-let fontType = [
-  { type: "Arial", text: "Arial" },
-  { type: "Aharoni", text: "Aharoni" },
-  { type: "Bell MT", text: "Bell MT" },
-  { type: "Fantasy", text: "Fantasy" },
-  { type: "Times New Roman", text: "Times New Roman" },
-  { type: "Segoe UI", text: "Cubic Bezier" },
-  { type: '"Verdana") ', text: "Cubic Bezaier" }
-];
+// let fontType = [
+//   { type: "Arial", text: "Arial" },
+//   { type: "Aharoni", text: "Aharoni" },
+//   { type: "Bell MT", text: "Bell MT" },
+//   { type: "Fantasy", text: "Fantasy" },
+//   { type: "Times New Roman", text: "Times New Roman" },
+//   { type: "Segoe UI", text: "Cubic Bezier" },
+//   { type: '"Verdana") ', text: "Cubic Bezaier" }
+// ];
 
-let templateList = [
-  { value: "none", text: "None" },
-  { value: "industry", text: "Industry Competitors" },
-  { value: "suppliers", text: "Suppliers" },
-  { value: "potential", text: "Potential Entrants" },
-  { value: "buyers", text: "Buyers" },
-  { value: "substitutes", text: "Substitutes" }
-];
+// let templateList = [
+//   { value: "none", text: "None" },
+//   { value: "industry", text: "Industry Competitors" },
+//   { value: "suppliers", text: "Suppliers" },
+//   { value: "potential", text: "Potential Entrants" },
+//   { value: "buyers", text: "Buyers" },
+//   { value: "substitutes", text: "Substitutes" }
+// ];
 
 //Initializes connector symbols for the symbol palette
-let connectorSymbols: ConnectorModel[] = [
+// let connectorSymbols: ConnectorModel[] = [
+// //   {
+// //     id: "connector100",
+// //     targetDecorator: {
+// //         style: {
+// //             strokeColor: '#6BA5D7',
+// //             fill: '#6BA5D7',
+// //             strokeWidth: 2
+// //         }
+// //     },
+// //     style: {
+// //         // Stroke color
+// //         strokeColor: '#6BA5D7',
+// //         fill: '#6BA5D7',
+// //         // Stroke width of the line
+// //         strokeWidth: 2,
+// //         // Line style
+// //         strokeDashArray: '2,2'
+// //     },
+// //     sourcePoint: {
+// //         x: 100,
+// //         y: 100
+// //     },
+// //     targetPoint: {
+// //         x: 200,
+// //         y: 200
+// //     },
+// //     segments: [{
+// //             type: 'Orthogonal',
+// //             direction: 'Right',
+// //             length: 50
+// //         }],
+// // },
 //   {
-//     id: "connector100",
-//     targetDecorator: {
-//         style: {
-//             strokeColor: '#6BA5D7',
-//             fill: '#6BA5D7',
-//             strokeWidth: 2
-//         }
-//     },
-//     style: {
-//         // Stroke color
-//         strokeColor: '#6BA5D7',
-//         fill: '#6BA5D7',
-//         // Stroke width of the line
-//         strokeWidth: 2,
-//         // Line style
-//         strokeDashArray: '2,2'
-//     },
-//     sourcePoint: {
-//         x: 100,
-//         y: 100
-//     },
-//     targetPoint: {
-//         x: 200,
-//         y: 200
-//     },
-//     segments: [{
-//             type: 'Orthogonal',
-//             direction: 'Right',
-//             length: 50
-//         }],
-// },
-  {
-    id: "Link0",
-    type: "Straight",
-    sourceID: "Start",
-    targetID: "End",
-    sourcePoint: { x: 0, y: 0 },
-    targetPoint: { x: 60, y: 60 },
-    // segments: [{
-    //   type: 'Orthogonal',
-    //   // Defines the direction for the segment lines
-    //   direction: "Right",
-    //   // Defines the length for the segment lines
-    //   length: 70,
-    // }],
+//     id: "Link0",
+//     type: "Straight",
+//     sourceID: "Start",
+//     targetID: "End",
+//     sourcePoint: { x: 0, y: 0 },
+//     targetPoint: { x: 60, y: 60 },
+//     // segments: [{
+//     //   type: 'Orthogonal',
+//     //   // Defines the direction for the segment lines
+//     //   direction: "Right",
+//     //   // Defines the length for the segment lines
+//     //   length: 70,
+//     // }],
     
-    targetDecorator: { shape: "OpenArrow", style: { strokeColor: '#757575', fill: '#757575', strokeWidth: 1.0,  } },
-    style: { strokeWidth: 1, strokeColor: 'yellow' }, // #757575
-  //   segments: [{
-  //     type: 'Orthogonal',
-  //     direction: 'Right',
-  //     length: 50
-  // }],
-  },
-  {
-    id: "Link1",
-    type: "Orthogonal",
-    sourcePoint: { x: 0, y: 0 },
-    targetPoint: { x: 60, y: 60 },
-    targetDecorator: { shape: "Arrow", style: { strokeColor: '#757575', fill: '#757575' } },
-    style: { strokeWidth: 1, strokeColor: '#757575' }
-  },
-  {
-    id: "link3",
-    type: "Orthogonal",
-    sourcePoint: { x: 0, y: 0 },
-    targetPoint: { x: 60, y: 60 },
-    style: { strokeWidth: 1, strokeColor: '#757575' },
-    targetDecorator: { shape: "None" },
-  },
-  {
-    id: "Link21",
-    type: "Straight",
-    sourcePoint: { x: 0, y: 0 },
-    targetPoint: { x: 60, y: 60 },
-    targetDecorator: { shape: "Arrow", style: { strokeColor: '#757575', fill: '#757575' } },
-    style: { strokeWidth: 1, strokeColor: '#757575' }
-  },
-  {
-    id: "link23",
-    type: "Straight",
-    sourcePoint: { x: 0, y: 0 },
-    targetPoint: { x: 60, y: 60 },
-    style: { strokeWidth: 1, strokeColor: '#757575' },
-    targetDecorator: { shape: "None" }
-  },
-  {
-    id: "link33",
-    type: "Bezier",
-    sourcePoint: { x: 0, y: 0 },
-    targetPoint: { x: 60, y: 60 },
-    style: { strokeWidth: 1, strokeColor: '#757575' },
-    targetDecorator: { shape: "None" }
-  }
-];
+//     targetDecorator: { shape: "OpenArrow", style: { strokeColor: '#757575', fill: '#757575', strokeWidth: 1.0,  } },
+//     style: { strokeWidth: 1, strokeColor: 'yellow' }, // #757575
+//   //   segments: [{
+//   //     type: 'Orthogonal',
+//   //     direction: 'Right',
+//   //     length: 50
+//   // }],
+//   },
+//   {
+//     id: "Link1",
+//     type: "Orthogonal",
+//     sourcePoint: { x: 0, y: 0 },
+//     targetPoint: { x: 60, y: 60 },
+//     targetDecorator: { shape: "Arrow", style: { strokeColor: '#757575', fill: '#757575' } },
+//     style: { strokeWidth: 1, strokeColor: '#757575' }
+//   },
+//   {
+//     id: "link3",
+//     type: "Orthogonal",
+//     sourcePoint: { x: 0, y: 0 },
+//     targetPoint: { x: 60, y: 60 },
+//     style: { strokeWidth: 1, strokeColor: '#757575' },
+//     targetDecorator: { shape: "None" },
+//   },
+//   {
+//     id: "Link21",
+//     type: "Straight",
+//     sourcePoint: { x: 0, y: 0 },
+//     targetPoint: { x: 60, y: 60 },
+//     targetDecorator: { shape: "Arrow", style: { strokeColor: '#757575', fill: '#757575' } },
+//     style: { strokeWidth: 1, strokeColor: '#757575' }
+//   },
+//   {
+//     id: "link23",
+//     type: "Straight",
+//     sourcePoint: { x: 0, y: 0 },
+//     targetPoint: { x: 60, y: 60 },
+//     style: { strokeWidth: 1, strokeColor: '#757575' },
+//     targetDecorator: { shape: "None" }
+//   },
+//   {
+//     id: "link33",
+//     type: "Bezier",
+//     sourcePoint: { x: 0, y: 0 },
+//     targetPoint: { x: 60, y: 60 },
+//     style: { strokeWidth: 1, strokeColor: '#757575' },
+//     targetDecorator: { shape: "None" }
+//   }
+// ];
 let interval: number[];
 interval = [
   1,
@@ -555,49 +573,50 @@ let italic: any;
 let underLine: any;
 let templateData: DropDownListComponent | null;
 let toolbarEditor:ToolbarComponent;
-let toolbarItems:any = [
-  { tooltipText: 'Color Change',template: '<button onclick={colorChangeHandler} id="colorBtn" style="width:100%;"></button>',cssClass:'tb-item-middle'},
-  { prefixIcon: 'e-icons e-circle-add', tooltipText: 'New Diagram' },
-  { prefixIcon: 'e-icons e-folder-open', tooltipText: 'Open Diagram', },
-  { prefixIcon: 'e-icons e-save', tooltipText: 'Save Diagram' },
-  { prefixIcon: 'e-print e-icons', tooltipText: 'Print Diagram'},
-  { type: 'Input', tooltipText: 'Export Diagram',template: '<button id="exportBtn" style="width:100%;"></button>'},
-          { type: 'Separator' },
-  {disabled:true, prefixIcon: 'e-cut e-icons', tooltipText: 'Cut',cssClass:'tb-item-middle tb-item-lock-category' },
-  {disabled:true,  prefixIcon: 'e-copy e-icons', tooltipText: 'Copy',cssClass:'tb-item-middle tb-item-lock-category' },
-  { prefixIcon: 'e-icons e-paste', tooltipText: 'Paste',disabled:true },
-                      {type: 'Separator' },
-  {disabled:true,  prefixIcon: 'e-icons e-undo', tooltipText: 'Undo'},
-  {disabled:true,  prefixIcon: 'e-icons e-redo', tooltipText: 'Redo'},
-                  { type: 'Separator',},
-  { prefixIcon: 'e-pan e-icons', tooltipText: 'Pan Tool',cssClass:'tb-item-start pan-item'},
-  { prefixIcon: 'e-mouse-pointer e-icons', tooltipText: 'Select Tool',cssClass:'tb-item-middle tb-item-selected'},
-  { tooltipText: 'Change Connector Type',template: '<button id="conTypeBtn" style="width:100%;"></button>',cssClass:'tb-item-middle'},
-  { tooltipText: 'Draw Shapes',template: '<button id="shapesBtn" style="width:100%;"></button>',cssClass:'tb-item-middle'},
+// let toolbarItems:any = [
+//   { tooltipText: 'Color Change',template: '<button onclick={colorChangeHandler} id="colorBtn" style="width:100%;"></button>',cssClass:'tb-item-middle'},
+//   { prefixIcon: 'e-icons e-circle-add', tooltipText: 'New Diagram' },
+//   { prefixIcon: 'e-icons e-folder-open', tooltipText: 'Open Diagram', },
+//   { prefixIcon: 'e-icons e-save', tooltipText: 'Save Diagram' },
+//   { prefixIcon: 'e-print e-icons', tooltipText: 'Print Diagram'},
+//   { type: 'Input', tooltipText: 'Export Diagram',template: '<button id="exportBtn" style="width:100%;"></button>'},
+//           { type: 'Separator' },
+//   {disabled:true, prefixIcon: 'e-cut e-icons', tooltipText: 'Cut',cssClass:'tb-item-middle tb-item-lock-category' },
+//   {disabled:true,  prefixIcon: 'e-copy e-icons', tooltipText: 'Copy',cssClass:'tb-item-middle tb-item-lock-category' },
+//   { prefixIcon: 'e-icons e-paste', tooltipText: 'Paste',disabled:true },
+//                       {type: 'Separator' },
+//   {disabled:true,  prefixIcon: 'e-icons e-undo', tooltipText: 'Undo'},
+//   {disabled:true,  prefixIcon: 'e-icons e-redo', tooltipText: 'Redo'},
+//                   { type: 'Separator',},
+//   { prefixIcon: 'e-pan e-icons', tooltipText: 'Pan Tool',cssClass:'tb-item-start pan-item'},
+//   { prefixIcon: 'e-mouse-pointer e-icons', tooltipText: 'Select Tool',cssClass:'tb-item-middle tb-item-selected'},
+//   { tooltipText: 'Change Connector Type',template: '<button id="conTypeBtn" style="width:100%;"></button>',cssClass:'tb-item-middle'},
+//   { tooltipText: 'Draw Shapes',template: '<button id="shapesBtn" style="width:100%;"></button>',cssClass:'tb-item-middle'},
   
-  { prefixIcon: 'e-caption e-icons', tooltipText: 'Text Tool',cssClass:'tb-item-end' },
-                  { type: 'Separator',},
-  {disabled:true,  prefixIcon: 'e-icons e-lock', tooltipText: 'Lock' ,cssClass:'tb-item-middle tb-item-lock-category' },
-  {disabled:true,  prefixIcon: 'e-trash e-icons', tooltipText: 'Delete',cssClass:'tb-item-middle tb-item-lock-category' },
-                  { type: 'Separator',align:'Center' },
+//   { prefixIcon: 'e-caption e-icons', tooltipText: 'Text Tool',cssClass:'tb-item-end' },
+//                   { type: 'Separator',},
+//   {disabled:true,  prefixIcon: 'e-icons e-lock', tooltipText: 'Lock' ,cssClass:'tb-item-middle tb-item-lock-category' },
+//   {disabled:true,  prefixIcon: 'e-trash e-icons', tooltipText: 'Delete',cssClass:'tb-item-middle tb-item-lock-category' },
+//                   { type: 'Separator',align:'Center' },
   
-  {disabled:true,  type: 'Input', tooltipText: 'Align Objects',template: '<button id="alignBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle  tb-item-align-category'},
-  {disabled:true,  type: 'Input', tooltipText: 'Distribute Objects',template: '<button id="distributeBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle tb-item-space-category'},
-              { type: 'Separator', },
-  {disabled:true,  type: 'Input', tooltipText: 'Order Commands',template: '<button id="orderBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle tb-item-lock-category'},
-                  { type: 'Separator'},
-  {disabled:true,  type: 'Input', tooltipText: 'Group/Ungroup',template: '<button id="groupBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-align-category'},
-                  { type: 'Separator'},
-  {disabled:true,  type: 'Input', tooltipText: 'Rotate',template: '<button id="rotateBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-lock-category'},
-                  { type: 'Separator'},
-  {disabled:true,  type: 'Input', tooltipText: 'Flip',template: '<button id="flipBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-lock-category'},
-                  { type: 'Separator'},
-  {
-      cssClass: 'tb-item-end tb-zoom-dropdown-btn', template: '<button id="btnZoomIncrement"></button>',
-  },
-];
+//   {disabled:true,  type: 'Input', tooltipText: 'Align Objects',template: '<button id="alignBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle  tb-item-align-category'},
+//   {disabled:true,  type: 'Input', tooltipText: 'Distribute Objects',template: '<button id="distributeBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle tb-item-space-category'},
+//               { type: 'Separator', },
+//   {disabled:true,  type: 'Input', tooltipText: 'Order Commands',template: '<button id="orderBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle tb-item-lock-category'},
+//                   { type: 'Separator'},
+//   {disabled:true,  type: 'Input', tooltipText: 'Group/Ungroup',template: '<button id="groupBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-align-category'},
+//                   { type: 'Separator'},
+//   {disabled:true,  type: 'Input', tooltipText: 'Rotate',template: '<button id="rotateBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-lock-category'},
+//                   { type: 'Separator'},
+//   {disabled:true,  type: 'Input', tooltipText: 'Flip',template: '<button id="flipBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-lock-category'},
+//                   { type: 'Separator'},
+//   {
+//       cssClass: 'tb-item-end tb-zoom-dropdown-btn', template: '<button id="btnZoomIncrement"></button>',
+//   },
+// ];
 
 //Apply the appearence of the Annotation
+
 function changed(value: string) {
   if (diagramInstance && diagramInstance?.selectedItems?.nodes?.length)
     for (let i = 0; i < diagramInstance?.selectedItems?.nodes?.length; i++) {
@@ -791,6 +810,7 @@ function Default() {
       const appearanceElement = window.document.getElementById("appearance")!
       appearanceElement.onclick = (args) => {
         let target: any = args.target;
+        console.log('traget value ===> ', target, target?.id, target?.title, args)
         let selectedElement = document.getElementsByClassName("e-selected-style");
         if (selectedElement.length) {
             selectedElement[0].classList.remove("e-selected-style");
@@ -835,7 +855,7 @@ function Default() {
             target.classList.add("e-selected-style");
             break;
           case "image":
-            getImageNode();
+            getImageNode(target?.style?.backgroundImage);
             break;
           case "svg":
             getSVGNode();
@@ -1321,13 +1341,23 @@ function createPort(id: string, offset: { x: number; y: number; }) {
           "</g> </svg>";
       return str;
   }
-  function getImageNode() {
-      let drawingshape;
-      drawingshape = { type: "Image", source: "https://ej2.syncfusion.com/react/demos/src/diagram/employee.png" };
-      node = {
-          shape: drawingshape
-      };
-      setdrawobject(node, null);
+  function getImageNode(targerValue?: any) {
+    const urlRegex = /url\(['"]?(.*?)['"]?\)/;
+    const matches = targerValue.match(urlRegex);
+    let imageUrl = ''
+
+    if (matches && matches.length >= 2) {
+      imageUrl = matches[1]; // Extracted image URL
+    }
+    
+    let drawingshape;
+    drawingshape = { type: "Image", source: imageUrl ? imageUrl :
+    "https://ej2.syncfusion.com/react/demos/src/diagram/employee.png" 
+    };
+    node = {
+        shape: drawingshape
+    };
+    setdrawobject(node, null);
   }
   function getPathShape() {
       // tslint:disable-next-line:max-line-length
@@ -1734,10 +1764,14 @@ function createPort(id: string, offset: { x: number; y: number; }) {
             Shapes Filling
           </div>
           <div className="flex">
-              <div title="Image" className="image-pattern-style" id="image" style={{
+              <div title="Image" className="image-pattern-style" id="image" placeholder="https://ej2.syncfusion.com/react/demos/src/diagram/Images/drawingTool/DrawingTool_7.png" style={{
               backgroundImage: "url('https://ej2.syncfusion.com/react/demos/src/diagram/Images/drawingTool/DrawingTool_7.png')",
               marginRight: "3px"
           }}/>
+              <div title="SDiagram" className="image-pattern-style" id="image" aria-label="https://venngage-wordpress.s3.amazonaws.com/uploads/2021/10/How-to-Diagram-a-Business-Process-Process-Diagramming-Templates-Blog-Header.png"  style={{
+                backgroundImage: "url('https://venngage-wordpress.s3.amazonaws.com/uploads/2021/10/How-to-Diagram-a-Business-Process-Process-Diagramming-Templates-Blog-Header.png')",
+                marginRight: "3px",
+              }}/>
               <div title="SVG" className="image-pattern-style" id="svg" style={{
               backgroundImage: "url('https://ej2.syncfusion.com/react/demos/src/diagram/Images/drawingTool/DrawingTool_8.png')",
               marginRight: "3px"
