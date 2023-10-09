@@ -443,7 +443,7 @@
     display: none;
     transition: transform 300ms linear, visibility 0s linear 300ms;
     width: 39%;
-    height: 100%;
+    height: 100%; 
   }
 
   .sb-mobile-palette-bar {
@@ -909,5 +909,10 @@
 }
 
 .diagram-control-pane #diagram_editTextBoxDiv {
-  height: 200px !important;
+  height: 20px !important;
+}
+
+textarea {
+  height: 12px;
+  width: 51px;
 }

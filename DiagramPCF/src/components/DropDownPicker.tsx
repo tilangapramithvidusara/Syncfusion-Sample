@@ -6,7 +6,7 @@ import * as ReactDom from 'react-dom';
 enableRipple(true);
 
 // To render DropDownButton.
-function DropDownPicker({setValue, value}: {setValue: any, value: string}) {
+function DropDownPicker({setValue, value, changed, changedType, diagramInstance}: {setValue: any, value: string, changed?: any, changedType?: string, diagramInstance?: any}) {
   let items: object[] = [
     { text: 'Segoe UI', value: 'Segoe UI' },
     { text: 'Arial', value: 'Arial,Helvetica,sans-serif' },
@@ -18,7 +18,17 @@ function DropDownPicker({setValue, value}: {setValue: any, value: string}) {
   
   const selectHandler = (value: any) => {
     console.log('vallll ====> ', value.item.properties.text)
+    // setValue(value.item.properties.text);
+    for (let i = 0; i < diagramInstance.selectedItems.nodes.length; i++) {
+      let node = diagramInstance.selectedItems.nodes[i];
+      for (let j = 0; j < node.annotations.length; j++) {
+          node.annotations[j]
+              .style.fontFamily =
+              value.item.properties.text;
+      }
+    }
     setValue(value.item.properties.text);
+    // if (selectedItems?.length && selectedItems[0]?.properties?.annotations[0]) selectedItems[0].properties.annotations[0].properties.style.properties.fontFamily = value.item.properties.text;
   }
 
   return (

@@ -563,12 +563,12 @@ let toolbarItems:any = [
   { prefixIcon: 'e-print e-icons', tooltipText: 'Print Diagram'},
   { type: 'Input', tooltipText: 'Export Diagram',template: '<button id="exportBtn" style="width:100%;"></button>'},
           { type: 'Separator' },
-  {disabled:true, prefixIcon: 'e-cut e-icons', tooltipText: 'Cut',cssClass:'tb-item-middle tb-item-lock-category' },
-  {disabled:true,  prefixIcon: 'e-copy e-icons', tooltipText: 'Copy',cssClass:'tb-item-middle tb-item-lock-category' },
+  {disabled:false, prefixIcon: 'e-cut e-icons', tooltipText: 'Cut',cssClass:'tb-item-middle tb-item-lock-category' },
+  {disabled:false,  prefixIcon: 'e-copy e-icons', tooltipText: 'Copy',cssClass:'tb-item-middle tb-item-lock-category' },
   { prefixIcon: 'e-icons e-paste', tooltipText: 'Paste',disabled:true },
                       {type: 'Separator' },
-  {disabled:true,  prefixIcon: 'e-icons e-undo', tooltipText: 'Undo'},
-  {disabled:true,  prefixIcon: 'e-icons e-redo', tooltipText: 'Redo'},
+  {disabled:false,  prefixIcon: 'e-icons e-undo', tooltipText: 'Undo'},
+  {disabled:false,  prefixIcon: 'e-icons e-redo', tooltipText: 'Redo'},
                   { type: 'Separator',},
   { prefixIcon: 'e-pan e-icons', tooltipText: 'Pan Tool',cssClass:'tb-item-start pan-item'},
   { prefixIcon: 'e-mouse-pointer e-icons', tooltipText: 'Select Tool',cssClass:'tb-item-middle tb-item-selected'},
@@ -577,20 +577,20 @@ let toolbarItems:any = [
   
   { prefixIcon: 'e-caption e-icons', tooltipText: 'Text Tool',cssClass:'tb-item-end' },
                   { type: 'Separator',},
-  {disabled:true,  prefixIcon: 'e-icons e-lock', tooltipText: 'Lock' ,cssClass:'tb-item-middle tb-item-lock-category' },
-  {disabled:true,  prefixIcon: 'e-trash e-icons', tooltipText: 'Delete',cssClass:'tb-item-middle tb-item-lock-category' },
+  {disabled:false,  prefixIcon: 'e-icons e-lock', tooltipText: 'Lock' ,cssClass:'tb-item-middle tb-item-lock-category' },
+  {disabled:false,  prefixIcon: 'e-trash e-icons', tooltipText: 'Delete',cssClass:'tb-item-middle tb-item-lock-category' },
                   { type: 'Separator',align:'Center' },
   
-  {disabled:true,  type: 'Input', tooltipText: 'Align Objects',template: '<button id="alignBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle  tb-item-align-category'},
-  {disabled:true,  type: 'Input', tooltipText: 'Distribute Objects',template: '<button id="distributeBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle tb-item-space-category'},
+  {disabled:false,  type: 'Input', tooltipText: 'Align Objects',template: '<button id="alignBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle  tb-item-align-category'},
+  {disabled:false,  type: 'Input', tooltipText: 'Distribute Objects',template: '<button id="distributeBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle tb-item-space-category'},
               { type: 'Separator', },
-  {disabled:true,  type: 'Input', tooltipText: 'Order Commands',template: '<button id="orderBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle tb-item-lock-category'},
+  {disabled:false,  type: 'Input', tooltipText: 'Order Commands',template: '<button id="orderBtn" style="width:100%;"></button>',cssClass: 'tb-item-middle tb-item-lock-category'},
                   { type: 'Separator'},
-  {disabled:true,  type: 'Input', tooltipText: 'Group/Ungroup',template: '<button id="groupBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-align-category'},
+  {disabled:false,  type: 'Input', tooltipText: 'Group/Ungroup',template: '<button id="groupBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-align-category'},
                   { type: 'Separator'},
-  {disabled:true,  type: 'Input', tooltipText: 'Rotate',template: '<button id="rotateBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-lock-category'},
+  {disabled:false,  type: 'Input', tooltipText: 'Rotate',template: '<button id="rotateBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-lock-category'},
                   { type: 'Separator'},
-  {disabled:true,  type: 'Input', tooltipText: 'Flip',template: '<button id="flipBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-lock-category'},
+  {disabled:false,  type: 'Input', tooltipText: 'Flip',template: '<button id="flipBtn" style="width:100%;"></button>',cssClass:'tb-item-middle tb-item-lock-category'},
                   { type: 'Separator'},
   {
       cssClass: 'tb-item-end tb-zoom-dropdown-btn', template: '<button id="btnZoomIncrement"></button>',
@@ -731,6 +731,7 @@ function Default() {
   const hiddenTitle = "Show Color Picker";
   const openTitle = "Hide Color Picker";
   const divRef = useRef(null);
+  const newDivRef = useRef<any>();
 
   const handleCaptureScreenshot = () => {
     // Get the selected div by its class name or ID
@@ -997,7 +998,7 @@ function createPort(id: string, offset: { x: number; y: number; }) {
       case 'Text Tool':
         diagramInstance.clearSelection();
         diagramInstance.selectedItems.userHandles = [];
-        diagramInstance.drawingObject = { shape: { type: 'Text' } };
+        diagramInstance.drawingObject = { shape: { type: 'Text' }, style: {height: '100px'} };
         diagramInstance.tool = DiagramTools.ContinuousDraw;
         break;
       case 'Pan Tool':
@@ -1109,7 +1110,8 @@ function createPort(id: string, offset: { x: number; y: number; }) {
 
   function onSelectGroup(args:any){
     if(args.item.text === 'Group'){
-        diagramInstance.group();
+      console.log("Group ==> ", diagramInstance, diagramInstance.group());
+      diagramInstance.group();
     }
     else if(args.item.text === 'Ungroup'){
         diagramInstance.unGroup();
@@ -1341,6 +1343,37 @@ function createPort(id: string, offset: { x: number; y: number; }) {
       };
       setdrawobject(node, null);
   }
+
+  React.useEffect(() => {
+    function handleKeyDown(event: any) {
+      console.log('onKey');
+  
+      const divId = 'diagram_editTextBoxDiv';
+      const textAreaId = 'diagram_editBox';
+  
+      const divElement = document.getElementById(divId);
+      const textArea = document.getElementById(textAreaId);
+  
+      if (divElement && textArea) {
+        divElement.style.height = '12px';
+        divElement.style.width = '51px';
+  
+        textArea.style.height = '12px';
+        // textArea.hidden = true;
+  
+        console.log('Styles applied:', divElement.style.height, textArea.style.height);
+      } else {
+        console.log('Elements not found:', divElement, textArea);
+      }
+    }
+  
+    window.addEventListener('keydown', handleKeyDown);
+  
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);  
+  
   return (
     <div className="control-pane diagram-control-pane">
      <div className="text-right mb-10"><button className="btn btn-primary" onClick={handleCaptureScreenshot}>Capture Screenshot</button></div>
@@ -1582,8 +1615,81 @@ function createPort(id: string, offset: { x: number; y: number; }) {
             historyChange={(args:IHistoryChangeArgs) => {
               historyChange(args);
             }}
+            onClick={(e: any) => {
+              console.log('click', e)
+              const divId = 'diagram_editTextBoxDiv'; // Replace with the actual id
+
+                // Get the div element by its id
+              const divElement = document.getElementById(divId);
+              const textArea = document.getElementById('diagram_editBox');
+              console.log('lll ==> ', divElement, textArea)
+              if (divElement && textArea) {
+                // Check if the div element exists
+                divElement.style.height = '12px'; // Set the height to your desired value
+                // divElement.style.display= 'none';
+                divElement.style.width = '51px';
+
+                textArea.style.height = '12px';
+                // divElement.style.backgroundColor = 'red'
+                // divElement.style.marginBottom = '100px'
+                // divElement.style.paddingBottom = '100px'
+                // divElement.style.position = 'related'
+              }
+              console.log('lll22 ==> ', divElement, textArea)
+            }}
+            onFocus={(e) => {
+              console.log('onFocus', e)
+              const divId = 'diagram_editTextBoxDiv'; // Replace with the actual id
+
+                // Get the div element by its id
+              const divElement = document.getElementById(divId);
+              const textArea = document.getElementById('diagram_editBox');
+              console.log('lll ==> ', divElement, textArea)
+              if (divElement && textArea) {
+                // Check if the div element exists
+                divElement.style.height = '12px'; // Set the height to your desired value
+                // divElement.style.display= 'none';
+                divElement.style.width = '51px';
+
+                textArea.style.height = '12px';
+                // divElement.style.backgroundColor = 'red'
+                // divElement.style.marginBottom = '100px'
+                // divElement.style.paddingBottom = '100px'
+                // divElement.style.position = 'related'
+              }
+              console.log('lll22 ==> ', divElement, textArea)
+            }}
+            onChange={(e: any) => {
+              console.log('onChange', e)
+              const divId = 'diagram_editTextBoxDiv'; // Replace with the actual id
+
+                // Get the div element by its id
+              const divElement = document.getElementById(divId);
+              const textArea = document.getElementById('diagram_editBox');
+              console.log('lll ==> ', divElement, textArea)
+              if (divElement && textArea) {
+                // Check if the div element exists
+                divElement.style.height = '12px'; // Set the height to your desired value
+                // divElement.style.display= 'none';
+                divElement.style.width = '51px';
+
+                textArea.style.height = '12px';
+                // divElement.style.backgroundColor = 'red'
+                // divElement.style.marginBottom = '100px'
+                // divElement.style.paddingBottom = '100px'
+                // divElement.style.position = 'related'
+              }
+              console.log('lll22 ==> ', divElement, textArea)
+            }}
+            
             selectionChange={(args:ISelectionChangeEventArgs) => {
+              console.log('call');
+              
               if (args.state === 'Changed') { // NodeModel
+                let getEl = document.getElementById('diagram_editTextBoxDiv');
+
+                console.log('get ==> ', getEl);
+                
                 let selectedItems: any[] = diagramInstance.selectedItems.nodes || [];
                 // console.log(selectedItems[0]?.properties?.style?.properties?.fill);
                 // console.log('ffff ==> ', selectedItems?.length && hiddenColorShape, selectedItems[0].properties.style.properties.fill, colorShape);
@@ -1669,11 +1775,11 @@ function createPort(id: string, offset: { x: number; y: number; }) {
                         node.annotations[0].offset.y === 1) {
                         updatePosition("bottomcenter_top");
                     }
+                  }
+                  enableOptions(args);
                 }
-                enableOptions(args);
-              }
-              
-            }}
+                
+              }}
               //Sets the Node style for DragEnter element.
               dragEnter={(args: IDragEnterEventArgs): void => {
                 let obj: NodeModel = args.element as NodeModel;
@@ -1687,7 +1793,8 @@ function createPort(id: string, offset: { x: number; y: number; }) {
                   obj.offsetY += (obj.height - oHeight) / 2;
                   obj.style = { fill: "red", strokeColor: "white" }; // #357BD2
                 }
-              }}
+              }
+            }
             >
               <Inject services={[PrintAndExport,UndoRedo]} />
             </DiagramComponent>
@@ -1729,6 +1836,11 @@ function createPort(id: string, offset: { x: number; y: number; }) {
                   }}/>
           </div>
         </div>
+        {false && (
+          <div ref={newDivRef} style={{position: "absolute", left: "0px", top: "0px", width: "51px", height: "12px"}}>
+
+          </div>
+        )}
         <div className="row property-panel-content" id="appearance">
           <div className="row-header">
             Shapes Filling
@@ -1748,6 +1860,9 @@ function createPort(id: string, offset: { x: number; y: number; }) {
           }}/>
           </div>
         </div>
+        {/* {false && (
+          <div ref={newDivRef}>This is the new div.</div>
+        )} */}
         <div className="row property-panel-content">
           <div className="row-header">
             Node Fill
@@ -1760,12 +1875,16 @@ function createPort(id: string, offset: { x: number; y: number; }) {
                           node.style.fill = arg.currentValue.rgba;
                   }
                 }} ref={nodeColor => (nodeColor = nodeColor)}/> */}
-                <ColorPicker  color={color}
-        hidden={hidden}
-        setColor={setColor}
-        setHidden={setHidden}
-        hiddenTitle={hiddenTitle}
-        openTitle={openTitle}  />
+            <ColorPicker  
+              color={colorShape}
+              hidden={hiddenColorShape}
+              setColor={setColorShape}
+              setHidden={setHiddenColorShape}
+              hiddenTitle={hiddenTitle}
+              openTitle={openTitle}
+              isFont={false}  
+              diagramInstance={diagramInstance}
+            />
           </div>
        </div>
        <div className="row property-panel-content">
@@ -1801,12 +1920,17 @@ function createPort(id: string, offset: { x: number; y: number; }) {
                       }
                   }
                 }} ref={fontcolor => (fontColor = fontcolor)}/> */}
-                    <ColorPicker  color={color}
-        hidden={hidden}
-        setColor={setColor}
-        setHidden={setHidden}
-        hiddenTitle={hiddenTitle}
-        openTitle={openTitle}  />
+              <ColorPicker 
+                color={colorFont}
+                hidden={hiddenColorFont}
+                setColor={setColorFont}
+                setHidden={setHiddenColorFont}
+                hiddenTitle={hiddenTitle}
+                openTitle={openTitle}  
+                isFont={true}
+                diagramInstance={diagramInstance}
+                // ref={fontcolor => (fontColor = fontcolor)}
+              />
             </div>
             <div className="column-style">
               <NumericTextBoxComponent 
@@ -1831,7 +1955,7 @@ function createPort(id: string, offset: { x: number; y: number; }) {
                 change={() => {
                     changed("fontfamily");
                 }} ref={(fontfamily) => (fontFamily = fontfamily)}/> */}
-              <DropDownPicker setValue={fontType} value="Select a font type" />
+              <DropDownPicker diagramInstance={diagramInstance} changed={changed} changedType={'fontfamily'} setValue={fontType} value="Select a font type" />
             </div>
           </div>
       </div>
